@@ -133,9 +133,19 @@ void wxsEvents::GenerateBindingCode(wxsCoderContext* Context,const wxString& IdS
                     {
                         case wxsEventDesc::Id:
                             if (UseBind)
+                            {
+                              if (IdString.IsEmpty())
+                                Context->m_EventsConnectingCode << VarNameString << "->Bind(" << Type << ", " << Method << ", this);\n";
+                              else
                                 Context->m_EventsConnectingCode << "Bind(" << Type << ", " << Method << ", this, " << IdString << ");\n";
+                            }
                             else
+                            {
+                              if (IdString.IsEmpty())
+                                Context->m_EventsConnectingCode << VarNameString << "->Connect(" << Type << ", (wxObjectEventFunction)" << Method << ", NULL, this);\n";
+                              else
                                 Context->m_EventsConnectingCode << "Connect(" << IdString << ", " << Type << ", (wxObjectEventFunction)" << Method << ");\n";
+                            }
                             break;
 
                         case wxsEventDesc::NoId:
