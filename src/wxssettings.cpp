@@ -57,7 +57,6 @@ const long wxsSettings::ID_CHECKBOX6 = wxNewId();
 const long wxsSettings::ID_CHOICE1 = wxNewId();
 const long wxsSettings::ID_SPINCTRL3 = wxNewId();
 const long wxsSettings::ID_CHECKBOX8 = wxNewId();
-const long wxsSettings::ID_CHECKBOX14 = wxNewId();
 const long wxsSettings::ID_CHECKBOX10 = wxNewId();
 const long wxsSettings::ID_CHECKBOX13 = wxNewId();
 const long wxsSettings::ID_CHECKBOX12 = wxNewId();
@@ -245,9 +244,6 @@ wxsSettings::wxsSettings(wxWindow* parent,cb_unused wxWindowID id)
     StaticBoxSizer2->Add(FlexGridSizer5, 1, wxALIGN_CENTER_VERTICAL, 5);
     FlexGridSizer6->Add(StaticBoxSizer2, 1, wxEXPAND, 4);
     StaticBoxSizer4 = new wxStaticBoxSizer(wxVERTICAL, this, _("Other settings"));
-    m_ItemsArray = new wxCheckBox(this, ID_CHECKBOX14, _("Use const array instead of Append method for wxChoice items"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOX14"));
-    m_ItemsArray->SetValue(false);
-    StaticBoxSizer4->Add(m_ItemsArray, 0, wxALIGN_LEFT, 5);
     m_RemovePrefix = new wxCheckBox(this, ID_CHECKBOX10, _("Auto remove variable prefix for event handler function"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOX10"));
     m_RemovePrefix->SetValue(false);
     StaticBoxSizer4->Add(m_RemovePrefix, 0, wxTOP|wxEXPAND, 5);
@@ -283,7 +279,7 @@ wxsSettings::wxsSettings(wxWindow* parent,cb_unused wxWindowID id)
     FlexGridSizer6->Add(StaticBoxSizer4, 1, wxEXPAND, 5);
     SetSizer(FlexGridSizer6);
 
-    Connect(ID_CHECKBOX7, wxEVT_COMMAND_CHECKBOX_CLICKED, (wxObjectEventFunction)&wxsSettings::OnUseGridClick);
+    Bind(wxEVT_COMMAND_CHECKBOX_CLICKED, &wxsSettings::OnUseGridClick, this, ID_CHECKBOX7);
     //*)
 
     ConfigManager* cfg = Manager::Get()->GetConfigManager("wxsmith");
@@ -323,7 +319,6 @@ wxsSettings::wxsSettings(wxWindow* parent,cb_unused wxWindowID id)
         m_GridSize->Disable();
     }
 
-    m_ItemsArray->SetValue(cfg->ReadBool("/useitemsarray", false));
     m_Continous->SetValue(cfg->ReadBool("/continousinsert", false));
     m_RemovePrefix->SetValue(cfg->ReadBool("/removeprefix", false));
     m_UseBind->SetValue(cfg->ReadBool("/usebind", false));
@@ -423,7 +418,6 @@ void wxsSettings::OnApply()
     else
         cfg->Write(_T("/gridsize"),-GridSize);
 
-    cfg->Write("/useitemsarray", m_ItemsArray->GetValue());
     cfg->Write("/continousinsert", m_Continous->GetValue());
     cfg->Write("/removeprefix", m_RemovePrefix->GetValue());
     cfg->Write("/usebind", m_UseBind->GetValue());

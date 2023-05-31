@@ -80,7 +80,6 @@ private:
     static const long ID_CHOICE1;
     static const long ID_SPINCTRL3;
     static const long ID_CHECKBOX8;
-    static const long ID_CHECKBOX14;
     static const long ID_CHECKBOX10;
     static const long ID_CHECKBOX13;
     static const long ID_CHECKBOX12;
@@ -100,7 +99,6 @@ private:
     wxCheckBox* m_BorderTop;
     wxCheckBox* m_Continous;
     wxCheckBox* m_EmptyIDs;
-    wxCheckBox* m_ItemsArray;
     wxCheckBox* m_RemovePrefix;
     wxCheckBox* m_SizeExpand;
     wxCheckBox* m_SizeShaped;

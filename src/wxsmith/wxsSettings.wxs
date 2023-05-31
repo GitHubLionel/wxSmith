@@ -418,13 +418,6 @@
 					<label>Other settings</label>
 					<orient>wxVERTICAL</orient>
 					<object class="sizeritem">
-						<object class="wxCheckBox" name="ID_CHECKBOX14" variable="m_ItemsArray" member="yes">
-							<label>Use const array instead of Append method for wxChoice items</label>
-						</object>
-						<flag>wxALIGN_LEFT</flag>
-						<border>5</border>
-					</object>
-					<object class="sizeritem">
 						<object class="wxCheckBox" name="ID_CHECKBOX10" variable="m_RemovePrefix" member="yes">
 							<label>Auto remove variable prefix for event handler function</label>
 						</object>

@@ -45,15 +45,13 @@ wxsChoice::wxsChoice(wxsItemResData* Data):
         &Reg.Info,
         wxsChoiceEvents,
         wxsChoiceStyles),
-    DefaultSelection(-1)
+    DefaultSelection(-1),
+    UseItemsArray(false)
 {}
 
 
 void wxsChoice::OnBuildCreatingCode()
 {
-    ConfigManager* cfg = Manager::Get()->GetConfigManager("wxsmith");
-    const bool UseItemsArray = cfg->ReadBool("/useitemsarray", true);
-
     switch ( GetLanguage() )
     {
         case wxsCPP:
@@ -132,5 +130,6 @@ wxObject* wxsChoice::OnBuildPreview(wxWindow* Parent,long Flags)
 void wxsChoice::OnEnumWidgetProperties(cb_unused long Flags)
 {
     WXS_ARRAYSTRING(wxsChoice,ArrayChoices, _("Choices"), "content", "item")
+    WXS_BOOL(wxsChoice,UseItemsArray, _("Use Items Array"), "use_items_array", false)
     WXS_LONG(wxsChoice,DefaultSelection, _("Selection"), "selection", -1)
 }
